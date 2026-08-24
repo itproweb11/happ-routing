@@ -29,12 +29,12 @@
 
   "DirectSites": [
     "geosite:private",
+    "geosite:tld-ru",
     "geosite:russia-inside",
     "geosite:category-ru",
 
     "domain:2ip.ru",
     "domain:2ip.io",
-
     "domain:myip.com",
 
     "domain:gosuslugi.ru",
