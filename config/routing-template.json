@@ -75,6 +75,6 @@
 
   "BlockIp": [],
 
-  "DomainStrategy": "IPIfNonMatch",
+  "DomainStrategy": "AsIs",
   "FakeDNS": "false"
 }
