@@ -1,0 +1,50 @@
+name: Sync upstream safely
+
+on:
+  schedule:
+    - cron: "15 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout my repository
+        uses: actions/checkout@v4
+
+      - name: Download upstream
+        run: |
+          git clone --depth=1 https://github.com/b-n-m-n/happ-routing.git /tmp/upstream
+
+      - name: Sync upstream scripts
+        run: |
+          rsync -a --delete /tmp/upstream/scripts/ scripts/
+
+      - name: Commit upstream updates
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add scripts/
+
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No upstream changes"
+          else
+            git commit -m "chore: sync upstream scripts"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Rebuild routing after update
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run build.yml --ref main
