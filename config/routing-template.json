@@ -60,92 +60,10 @@
 
   "ProxySites": [
     "geosite:youtube",
-    "domain:youtube.com",
-    "domain:youtu.be",
-    "domain:youtube-nocookie.com",
-    "domain:googlevideo.com",
-    "domain:ytimg.com",
-    "domain:youtubei.googleapis.com",
-    "domain:youtube.googleapis.com",
-    "domain:ggpht.com",
-
     "geosite:google-play",
-    "domain:googleapis.com",
-    "domain:googleusercontent.com",
-    "domain:gstatic.com",
-
     "geosite:github",
-    "domain:github.com",
-    "domain:githubusercontent.com",
-    "domain:githubassets.com",
-
     "geosite:telegram",
-    "domain:telegram.org",
-    "domain:t.me",
-
-    "domain:instagram.com",
-    "domain:instagram.net",
-    "domain:cdninstagram.com",
-
-    "domain:facebook.com",
-    "domain:facebook.net",
-    "domain:fbcdn.net",
-    "domain:messenger.com",
-
-    "domain:whatsapp.com",
-    "domain:whatsapp.net",
-    "domain:wa.me",
-
-    "domain:discord.com",
-    "domain:discord.gg",
-    "domain:discordapp.com",
-    "domain:discordapp.net",
-
-    "domain:reddit.com",
-    "domain:redd.it",
-
-    "domain:x.com",
-    "domain:twitter.com",
-    "domain:twimg.com",
-
-    "domain:openai.com",
-    "domain:chatgpt.com",
-    "domain:oaistatic.com",
-    "domain:oaiusercontent.com",
-
-    "domain:gemini.google.com",
-    "domain:ai.google.dev",
-    "domain:aistudio.google.com",
-
-    "domain:claude.ai",
-    "domain:anthropic.com",
-
-    "domain:copilot.microsoft.com",
-
-    "domain:deepseek.com",
-    "domain:grok.com",
-    "domain:x.ai",
-    "domain:perplexity.ai",
-    "domain:mistral.ai",
-    "domain:kimi.com",
-    "domain:qwen.ai",
-    "domain:poe.com",
-
-    "domain:midjourney.com",
-    "domain:leonardo.ai",
-    "domain:ideogram.ai",
-    "domain:runwayml.com",
-    "domain:suno.com",
-
-    "domain:huggingface.co",
-    "domain:replicate.com",
-    "domain:together.ai",
-    "domain:groq.com",
-
-    "domain:cursor.com",
-    "domain:cursor.sh",
-    "domain:codeium.com",
-    "domain:windsurf.com"
+    "geosite:twitch-ads"
   ],
 
   "ProxyIp": [],
