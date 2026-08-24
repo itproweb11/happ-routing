@@ -12,7 +12,7 @@
   "DomesticDNSIP": "77.88.8.8",
   "Geositeurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geosite.dat",
   "Geoipurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geoip.dat",
-  "LastUpdated": "1787613594",
+  "LastUpdated": "1787614654",
   "DnsHosts": {
     "dns.google": "8.8.8.8",
     "common.dot.dns.yandex.net": "77.88.8.8",
@@ -57,6 +57,6 @@
     "geosite:category-ads"
   ],
   "BlockIp": [],
-  "DomainStrategy": "IPIfNonMatch",
+  "DomainStrategy": "AsIs",
   "FakeDNS": "false"
 }
