@@ -1,6 +1,8 @@
 {
   "Name": "RU Direct - Global",
+
   "GlobalProxy": "true",
+
   "UseChunkFiles": "true",
 
   "RemoteDns": "8.8.8.8",
@@ -14,10 +16,14 @@
   "DomesticDNSDomain": "https://common.dot.dns.yandex.net/dns-query",
   "DomesticDNSIP": "77.88.8.8",
 
-  "Geositeurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geosite.dat",
-  "Geoipurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geoip.dat",
+
+  "Geositeurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geosite.dat",
+
+  "Geoipurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geoip.dat",
+
 
   "LastUpdated": "{{auto}}",
+
 
   "DnsHosts": {
     "dns.google": "8.8.8.8",
@@ -26,88 +32,45 @@
     "lknpd.nalog.ru": "213.24.64.181"
   },
 
+
   "RouteOrder": "block-proxy-direct",
+
 
   "DirectSites": [
     "geosite:private",
     "geosite:russia-inside",
     "geosite:tld-ru",
-    "geosite:category-ru",
-
-    "domain:2ip.ru",
-    "domain:2ip.io",
-    "domain:myip.com",
-
-    "domain:gosuslugi.ru",
-    "domain:mos.ru",
-    "domain:nalog.ru",
-
-    "domain:vk.com",
-    "domain:vk.ru",
-    "domain:ok.ru",
-
-    "domain:yandex.ru",
-    "domain:yandex.com",
-    "domain:ya.ru",
-
-    "domain:mail.ru",
-    "domain:rutube.ru",
-    "domain:avito.ru",
-
-    "domain:wildberries.ru",
-    "domain:ozon.ru",
-    "domain:sberbank.ru",
-    "domain:tinkoff.ru",
-    "domain:vtb.ru",
-    "domain:alfabank.ru",
-
-    "domain:dns-shop.ru",
-    "domain:citilink.ru",
-    "domain:mvideo.ru",
-
-    "domain:hh.ru",
-    "domain:auto.ru",
-    "domain:drom.ru",
-    "domain:cian.ru",
-    "domain:domclick.ru",
-
-    "domain:2gis.ru",
-
-    "domain:maps.yandex.ru",
-    "domain:taxi.yandex.ru",
-    "domain:eda.yandex.ru",
-    "domain:music.yandex.ru",
-
-    "domain:kinopoisk.ru",
-    "domain:ivi.ru",
-    "domain:okko.tv",
-    "domain:wink.ru",
-    "domain:vkvideo.ru",
-    "domain:max.ru"
+    "geosite:category-ru"
   ],
+
 
   "DirectIp": [
     "geoip:private",
     "geoip:russia-inside"
   ],
 
+
   "ProxySites": [
     "geosite:youtube",
     "geosite:google-play",
     "geosite:github",
-    "geosite:telegram",
-    "geosite:twitch-ads"
+    "geosite:telegram"
   ],
 
+
   "ProxyIp": [],
+
 
   "BlockSites": [
     "geosite:win-spy",
     "geosite:category-ads"
   ],
 
+
   "BlockIp": [],
 
+
   "DomainStrategy": "AsIs",
+
   "FakeDNS": "false"
 }
