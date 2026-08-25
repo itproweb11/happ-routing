@@ -14,8 +14,8 @@
   "DomesticDNSDomain": "https://common.dot.dns.yandex.net/dns-query",
   "DomesticDNSIP": "77.88.8.8",
 
-  "Geositeurl": "{{auto: подставляется scripts/build_routing.py}}",
-  "Geoipurl": "{{auto: подставляется scripts/build_routing.py}}",
+  "Geositeurl": "{{auto}}",
+  "Geoipurl": "{{auto}}",
   "LastUpdated": "{{auto}}",
 
   "DnsHosts": {
@@ -33,21 +33,17 @@
     "geosite:russia-inside",
     "geosite:category-ru",
 
-    "domain:2ip.ru",
-    "domain:2ip.io",
-    "domain:myip.com",
-
     "domain:gosuslugi.ru",
-    "domain:mos.ru",
     "domain:nalog.ru",
-
-    "domain:vk.com",
-    "domain:vk.ru",
-    "domain:ok.ru",
+    "domain:mos.ru",
 
     "domain:yandex.ru",
     "domain:yandex.com",
     "domain:ya.ru",
+
+    "domain:vk.com",
+    "domain:vk.ru",
+    "domain:ok.ru",
 
     "domain:mail.ru",
     "domain:rutube.ru",
@@ -65,13 +61,11 @@
     "domain:mvideo.ru",
 
     "domain:hh.ru",
-    "domain:youla.ru",
-    "domain:drom.ru",
     "domain:auto.ru",
+    "domain:drom.ru",
     "domain:cian.ru",
-    "domain:domclick.ru",
-
     "domain:2gis.ru",
+
     "domain:maps.yandex.ru",
     "domain:taxi.yandex.ru",
     "domain:eda.yandex.ru",
@@ -79,10 +73,7 @@
 
     "domain:kinopoisk.ru",
     "domain:ivi.ru",
-    "domain:okko.tv",
     "domain:wink.ru",
-
-    "domain:vkvideo.ru",
     "domain:max.ru"
   ],
 
@@ -95,8 +86,7 @@
     "geosite:youtube",
     "geosite:google-play",
     "geosite:github",
-    "geosite:telegram",
-    "geosite:twitch-ads"
+    "geosite:telegram"
   ],
 
   "ProxyIp": [],
