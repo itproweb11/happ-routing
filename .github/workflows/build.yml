@@ -160,35 +160,30 @@ JSON
 
 
 
-      - name: Commit files
+           - name: Commit files
         run: |
-
           git config user.name "github-actions[bot]"
-
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-
-          git add release HAPP
-
+          git add release HAPP config
 
           git commit -m "build: ${{ steps.routing.outputs.tag }}" || echo "nothing to commit"
 
 
-
       - name: Push changes
         run: |
-
           git push origin HEAD || true
 
 
-
       - name: Create GitHub Release
+        if: success()
         uses: softprops/action-gh-release@v2
-
         with:
-
           tag_name: ${{ steps.routing.outputs.tag }}
-
+          name: Happ Routing ${{ steps.routing.outputs.tag }}
           files: |
             release/geosite.dat
             release/geoip.dat
+            HAPP/ROUTING.JSON
+            HAPP/ROUTING.DEEPLINK
+            HAPP/ROUTING.ONADD.DEEPLINK
