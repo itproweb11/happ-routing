@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """
-Собирает итоговый Happ-профиль маршрутизации из шаблона:
+Собирает итоговый Happ-профиль маршрутизации:
 
 HAPP/ROUTING.JSON
 HAPP/ROUTING.DEEPLINK
 HAPP/ROUTING.ONADD.DEEPLINK
 
-Подставляет прямые ссылки GitHub на geosite/geoip
-и обновляет LastUpdated.
+Генерирует ссылки:
+- geosite.dat через jsDelivr (быстро)
+- geoip.dat через GitHub raw (актуально)
+
+Обновляет LastUpdated для принудительной загрузки Happ.
 """
 
 import argparse
@@ -21,66 +24,84 @@ from pathlib import Path
 
 def main() -> int:
 
-    ap = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
 
-    ap.add_argument(
+    parser.add_argument(
         "--template",
         default="config/routing-template.json"
     )
 
-    ap.add_argument(
+    parser.add_argument(
         "--repo",
         default=os.environ.get("GITHUB_REPOSITORY"),
         help="USER/REPO"
     )
 
-    ap.add_argument(
+    parser.add_argument(
         "--tag",
-        required=True,
-        help="release tag"
+        required=True
     )
 
-    ap.add_argument(
+    parser.add_argument(
         "--last-updated",
         default=str(int(time.time()))
     )
 
-    ap.add_argument(
+    parser.add_argument(
         "--outdir",
         default="HAPP"
     )
 
-    args = ap.parse_args()
+    args = parser.parse_args()
 
 
     if not args.repo or "/" not in args.repo:
         print(
-            "Ошибка: укажите --repo USER/REPO",
+            "Ошибка: нужен USER/REPO",
+            file=sys.stderr
+        )
+        return 1
+
+
+    template = Path(args.template)
+
+    if not template.exists():
+        print(
+            f"Нет шаблона: {template}",
             file=sys.stderr
         )
         return 1
 
 
     cfg = json.loads(
-        Path(args.template)
-        .read_text(encoding="utf-8")
+        template.read_text(
+            encoding="utf-8"
+        )
     )
 
 
-    # Прямые ссылки GitHub без jsdelivr-кэша
+    # ----------------------------
+    # GEO URL
+    # ----------------------------
 
-    base = (
+    jsdelivr = (
+        f"https://cdn.jsdelivr.net/gh/"
+        f"{args.repo}@main/release"
+    )
+
+    github_raw = (
         f"https://raw.githubusercontent.com/"
         f"{args.repo}/main/release"
     )
 
 
     cfg["Geositeurl"] = (
-        f"{base}/geosite.dat"
+        f"{jsdelivr}/geosite.dat"
     )
 
+
     cfg["Geoipurl"] = (
-        f"{base}/geoip.dat"
+        f"{github_raw}/geoip.dat"
     )
 
 
@@ -88,6 +109,10 @@ def main() -> int:
         args.last_updated
     )
 
+
+    # ----------------------------
+    # SAVE JSON
+    # ----------------------------
 
     outdir = Path(args.outdir)
 
@@ -104,15 +129,15 @@ def main() -> int:
     ) + "\n"
 
 
-    (
-        outdir / "ROUTING.JSON"
-    ).write_text(
+    (outdir / "ROUTING.JSON").write_text(
         json_text,
         encoding="utf-8"
     )
 
 
-    # deeplink add
+    # ----------------------------
+    # BASE64 FOR HAPP
+    # ----------------------------
 
     compact = json.dumps(
         cfg,
@@ -126,46 +151,36 @@ def main() -> int:
     ).decode("ascii")
 
 
-    (
-        outdir / "ROUTING.DEEPLINK"
-    ).write_text(
+    (outdir / "ROUTING.DEEPLINK").write_text(
         f"happ://routing/add/{b64}\n",
         encoding="utf-8"
     )
 
 
-    # deeplink auto add
-
-    (
-        outdir / "ROUTING.ONADD.DEEPLINK"
-    ).write_text(
+    (outdir / "ROUTING.ONADD.DEEPLINK").write_text(
         f"happ://routing/onadd/{b64}\n",
         encoding="utf-8"
     )
 
 
     print(
-        f"OK: профиль '{cfg.get('Name')}'"
+        "OK: Happ routing generated"
     )
 
     print(
-        f"Geo: {base}"
+        f"Repository: {args.repo}"
     )
 
     print(
-        "Generated:"
+        f"Geosite: {jsdelivr}/geosite.dat"
     )
 
     print(
-        " HAPP/ROUTING.JSON"
+        f"Geoip: {github_raw}/geoip.dat"
     )
 
     print(
-        " HAPP/ROUTING.DEEPLINK"
-    )
-
-    print(
-        " HAPP/ROUTING.ONADD.DEEPLINK"
+        f"Updated: {args.last_updated}"
     )
 
 
