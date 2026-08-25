@@ -23,7 +23,9 @@ jobs:
 
       - name: Download upstream
         run: |
-          git clone --depth=1 https://github.com/b-n-m-n/happ-routing.git /tmp/upstream
+          git clone --depth=1 --single-branch \
+            https://github.com/b-n-m-n/happ-routing.git \
+            /tmp/upstream
 
 
       - name: Sync upstream scripts only
@@ -35,18 +37,24 @@ jobs:
       - name: Commit upstream updates
         id: commit
         run: |
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add scripts/
 
           if git diff --cached --quiet; then
+
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No upstream script changes"
+
           else
+
             git commit -m "chore: sync upstream scripts"
             git push origin HEAD
+
             echo "changed=true" >> "$GITHUB_OUTPUT"
+
           fi
 
 
