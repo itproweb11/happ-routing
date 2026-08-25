@@ -11,7 +11,7 @@
       "type": "text",
       "action": "add",
       "args": {
-        "name": "RU",
+        "name": "ru",
         "uri": "./russia-inside.txt"
       }
     },
