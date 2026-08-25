@@ -5,8 +5,8 @@
       "action": "add",
       "args": {
         "uri": "./upstream-geoip.dat",
-        "filter": [
-          "ru"
+        "wanted": [
+          "RU"
         ]
       }
     },
