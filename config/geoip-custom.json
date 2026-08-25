@@ -6,7 +6,6 @@
       "args": {
         "uri": "./upstream-geoip.dat",
         "filter": [
-          "private",
           "ru"
         ]
       }
@@ -18,6 +17,10 @@
         "name": "russia-inside",
         "uri": "./russia-inside.txt"
       }
+    },
+    {
+      "type": "private",
+      "action": "add"
     }
   ],
   "output": [
