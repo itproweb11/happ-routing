@@ -10,9 +10,9 @@
   "DomesticDNSType": "DoH",
   "DomesticDNSDomain": "https://common.dot.dns.yandex.net/dns-query",
   "DomesticDNSIP": "77.88.8.8",
-  "Geositeurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geosite.dat",
+  "Geositeurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geosite.dat",
   "Geoipurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geoip.dat",
-  "LastUpdated": "1787661353",
+  "LastUpdated": "1787661467",
   "DnsHosts": {
     "dns.google": "8.8.8.8",
     "common.dot.dns.yandex.net": "77.88.8.8",
