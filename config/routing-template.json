@@ -1,6 +1,5 @@
 {
   "Name": "RU Direct - Global",
-
   "GlobalProxy": "true",
   "UseChunkFiles": "true",
 
@@ -15,14 +14,10 @@
   "DomesticDNSDomain": "https://common.dot.dns.yandex.net/dns-query",
   "DomesticDNSIP": "77.88.8.8",
 
-
   "Geositeurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geosite.dat",
-
   "Geoipurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geoip.dat",
 
-
   "LastUpdated": "{{auto}}",
-
 
   "DnsHosts": {
     "dns.google": "8.8.8.8",
@@ -31,12 +26,9 @@
     "lknpd.nalog.ru": "213.24.64.181"
   },
 
-
-  "RouteOrder": "block-direct-proxy",
-
+  "RouteOrder": "block-proxy-direct",
 
   "DirectSites": [
-
     "domain:2ip.ru",
     "domain:www.2ip.ru",
     "domain:2ip.io",
@@ -65,7 +57,9 @@
 
     "domain:wildberries.ru",
     "domain:ozon.ru",
+
     "domain:sberbank.ru",
+    "domain:tbank.ru",
     "domain:tinkoff.ru",
     "domain:vtb.ru",
     "domain:alfabank.ru",
@@ -95,46 +89,48 @@
     "domain:max.ru"
   ],
 
-
   "DirectIp": [
     "geoip:private",
     "geoip:russia-inside"
   ],
 
-
   "ProxySites": [
-
-    "geosite:google",
-
     "domain:gemini.google.com",
+    "domain:bard.google.com",
     "domain:ai.google",
-    "domain:generativelanguage.googleapis.com",
-    "domain:googleapis.com",
-    "domain:googleusercontent.com",
+    "domain:labs.google",
+    "domain:deepmind.google",
+
     "domain:accounts.google.com",
+    "domain:myaccount.google.com",
+
+    "domain:generativelanguage.googleapis.com",
+    "domain:content-generativelanguage.googleapis.com",
     "domain:oauth2.googleapis.com",
 
-    "geosite:youtube",
+    "domain:googleapis.com",
+    "domain:googleusercontent.com",
+    "domain:gstatic.com",
+    "domain:ggpht.com",
+
+    "geosite:google",
     "geosite:google-play",
+    "geosite:youtube",
+
     "geosite:github",
     "geosite:telegram",
     "geosite:twitch"
   ],
 
-
   "ProxyIp": [],
-
 
   "BlockSites": [
     "geosite:win-spy",
     "geosite:category-ads"
   ],
 
-
   "BlockIp": [],
 
-
   "DomainStrategy": "AsIs",
-
   "FakeDNS": "false"
 }
