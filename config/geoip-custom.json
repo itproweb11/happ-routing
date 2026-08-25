@@ -1,17 +1,10 @@
 {
   "input": [
     {
-      "type": "v2rayGeoIPDat",
-      "action": "add",
-      "args": {
-        "uri": "./upstream-geoip.dat"
-      }
-    },
-    {
       "type": "text",
       "action": "add",
       "args": {
-        "name": "russia-inside",
+        "name": "ru",
         "uri": "./russia-inside.txt"
       }
     },
