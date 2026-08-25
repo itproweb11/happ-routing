@@ -119,6 +119,17 @@ jobs:
 
 
           go run ./ -c config-custom.json
+          
+          echo "FINAL GEOIP SIZE"
+
+          ls -lh output/geoip.dat
+
+          SIZE=$(stat -c%s output/geoip.dat)
+
+          if [ "$SIZE" -gt 5000000 ]; then
+            echo "ERROR: geoip.dat too large: $SIZE bytes"
+            exit 1
+          fi
 
 
           cp output/geoip.dat ../release/geoip.dat
