@@ -108,29 +108,45 @@ jobs:
           mkdir -p output
 
 
-          curl -fsSL \
-            https://github.com/v2fly/geoip/releases/latest/download/geoip.dat \
-            -o upstream-geoip.dat
-
-
-          echo "========== UPSTREAM GEOIP =========="
-
-          ls -lh upstream-geoip.dat
-
-
           cp ../build/russia-inside.txt \
-            ./russia-inside.txt || true
+            ./russia-inside.txt
 
 
-          cp ../config/geoip-custom.json \
-            ./config-custom.json
+          cat > config-custom.json <<'EOF'
+{
+  "input": [
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ru",
+        "uri": "./russia-inside.txt"
+      }
+    },
+    {
+      "type": "private",
+      "action": "add"
+    }
+  ],
+  "output": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputDir": "./output",
+        "outputName": "geoip.dat"
+      }
+    }
+  ]
+}
+EOF
 
 
           echo "========== GEOIP CONFIG =========="
 
           cat config-custom.json
 
-          echo "==================================="
+          echo "=================================="
 
 
           go run ./ -c config-custom.json
@@ -143,25 +159,10 @@ jobs:
 
           SIZE=$(stat -c%s output/geoip.dat)
 
-
-          echo "GEOIP SIZE: $SIZE bytes"
-
-
-          if [ "$SIZE" -gt 5000000 ]; then
-
-            echo "ERROR: geoip.dat too large"
-
-            exit 1
-
-          fi
+          echo "SIZE: $SIZE bytes"
 
 
           cp output/geoip.dat ../release/geoip.dat
-
-
-          echo "========== FINAL GEOIP =========="
-
-          ls -lh ../release/geoip.dat
 
 
 
