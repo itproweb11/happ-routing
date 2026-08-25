@@ -14,8 +14,9 @@
   "DomesticDNSDomain": "https://common.dot.dns.yandex.net/dns-query",
   "DomesticDNSIP": "77.88.8.8",
 
-  "Geositeurl": "{{auto: подставляется scripts/build_routing.py}}",
-  "Geoipurl": "{{auto: подставляется scripts/build_routing.py}}",
+  "Geositeurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geosite.dat",
+  "Geoipurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geoip.dat",
+
   "LastUpdated": "{{auto}}",
 
   "DnsHosts": {
@@ -30,6 +31,7 @@
   "DirectSites": [
     "geosite:private",
     "geosite:russia-inside",
+    "geosite:tld-ru",
     "geosite:category-ru",
 
     "domain:2ip.ru",
@@ -50,7 +52,47 @@
 
     "domain:mail.ru",
     "domain:rutube.ru",
-    "domain:avito.ru"
+    "domain:avito.ru",
+
+    "domain:wildberries.ru",
+    "domain:ozon.ru",
+    "domain:sberbank.ru",
+    "domain:tinkoff.ru",
+    "domain:vtb.ru",
+    "domain:alfabank.ru",
+
+    "domain:dns-shop.ru",
+    "domain:citilink.ru",
+    "domain:mvideo.ru",
+
+    "domain:hh.ru",
+    "domain:youla.ru",
+    "domain:drom.ru",
+    "domain:auto.ru",
+    "domain:cian.ru",
+    "domain:domclick.ru",
+
+    "domain:lamoda.ru",
+    "domain:sportmaster.ru",
+    "domain:petrovich.ru",
+    "domain:leroymerlin.ru",
+    "domain:vseinstrumenti.ru",
+
+    "domain:2gis.ru",
+
+    "domain:maps.yandex.ru",
+    "domain:taxi.yandex.ru",
+    "domain:eda.yandex.ru",
+    "domain:music.yandex.ru",
+
+    "domain:kinopoisk.ru",
+    "domain:ivi.ru",
+    "domain:okko.tv",
+    "domain:wink.ru",
+    "domain:vkvideo.ru",
+    "domain:max.ru",
+
+    "domain:sbermegamarket.ru"
   ],
 
   "DirectIp": [
