@@ -12,7 +12,7 @@
   "DomesticDNSIP": "77.88.8.8",
   "Geositeurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geosite.dat",
   "Geoipurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geoip.dat",
-  "LastUpdated": "1787643663",
+  "LastUpdated": "1787645658",
   "DnsHosts": {
     "dns.google": "8.8.8.8",
     "common.dot.dns.yandex.net": "77.88.8.8",
@@ -23,6 +23,7 @@
   "DirectSites": [
     "geosite:private",
     "geosite:russia-inside",
+    "geosite:tld-ru",
     "geosite:category-ru",
     "domain:2ip.ru",
     "domain:2ip.io",
@@ -38,11 +39,36 @@
     "domain:ya.ru",
     "domain:mail.ru",
     "domain:rutube.ru",
-    "domain:avito.ru"
+    "domain:avito.ru",
+    "domain:wildberries.ru",
+    "domain:ozon.ru",
+    "domain:sberbank.ru",
+    "domain:tinkoff.ru",
+    "domain:vtb.ru",
+    "domain:alfabank.ru",
+    "domain:dns-shop.ru",
+    "domain:citilink.ru",
+    "domain:mvideo.ru",
+    "domain:hh.ru",
+    "domain:auto.ru",
+    "domain:drom.ru",
+    "domain:cian.ru",
+    "domain:domclick.ru",
+    "domain:2gis.ru",
+    "domain:maps.yandex.ru",
+    "domain:taxi.yandex.ru",
+    "domain:eda.yandex.ru",
+    "domain:music.yandex.ru",
+    "domain:kinopoisk.ru",
+    "domain:ivi.ru",
+    "domain:okko.tv",
+    "domain:wink.ru",
+    "domain:vkvideo.ru",
+    "domain:max.ru"
   ],
   "DirectIp": [
     "geoip:private",
-    "geoip:ru"
+    "geoip:RU"
   ],
   "ProxySites": [
     "geosite:youtube",
