@@ -3,7 +3,9 @@ name: Build geo-files and Happ routing
 on:
   schedule:
     - cron: "20 4 * * *"
+
   workflow_dispatch:
+
   push:
     branches:
       - main
@@ -13,13 +15,17 @@ on:
       - "scripts/**"
       - ".github/workflows/build.yml"
 
+
 permissions:
   contents: write
 
+
 jobs:
+
   build:
 
     runs-on: ubuntu-latest
+
 
     steps:
 
@@ -47,20 +53,27 @@ jobs:
 
       - name: Build geosite.dat
         run: |
+
           git clone --depth 1 https://github.com/v2fly/domain-list-community.git dlc
+
           git clone --depth 1 https://github.com/hydraponique/roscomvpn-geosite.git rvpn-geosite
 
+
           cp -f rvpn-geosite/data/* dlc/data/
+
           cp build/russia-inside dlc/data/russia-inside
 
-          mkdir -p "$GITHUB_WORKSPACE/release"
+
+          mkdir -p release
+
 
           cd dlc
+
 
           go run ./ \
             --datapath=./data \
             --outputname=geosite.dat \
-            --outputdir="$GITHUB_WORKSPACE/release"
+            --outputdir="../release"
 
 
 
@@ -70,15 +83,18 @@ jobs:
           git clone --depth 1 https://github.com/v2fly/geoip.git geoip-tool
 
 
-          curl -fsSL \
-            -o geoip-tool/upstream-geoip.dat \
-            https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
+          curl -L \
+          https://github.com/v2fly/geoip/releases/latest/download/geoip.dat \
+          -o geoip-tool/upstream-geoip.dat
 
 
           cp build/russia-inside.txt geoip-tool/russia-inside.txt
 
 
-          cat > geoip-tool/config-custom.json <<'EOF'
+          cd geoip-tool
+
+
+          cat > config-custom.json <<'JSON'
 {
   "input": [
     {
@@ -120,69 +136,53 @@ jobs:
     }
   ]
 }
-EOF
+JSON
 
-
-          cd geoip-tool
 
           go run ./ -c config-custom.json
 
 
-          cp output/geoip.dat "$GITHUB_WORKSPACE/release/geoip.dat"
-
-
-
-      - name: Check for changes
-        id: changes
-        run: |
-
-          if [ "${{ github.event_name }}" = "schedule" ] && [ -z "$(git status --porcelain -- release)" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
+          cp output/geoip.dat ../release/geoip.dat
 
 
 
       - name: Build Happ routing profile
-        if: steps.changes.outputs.skip == 'false'
         id: routing
         run: |
 
-          TAG="$(date -u +%Y%m%d%H%M)"
+          TAG=$(date -u +%Y%m%d%H%M)
 
-          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
 
 
           python3 scripts/build_routing.py --tag "$TAG"
 
 
-          pip install --quiet qrcode pillow
 
-
-          python3 -c "import qrcode; qrcode.make(open('HAPP/ROUTING.DEEPLINK').read().strip()).save('HAPP/ROUTING.QR.png')"
-
-
-
-      - name: Commit and tag
-        if: steps.changes.outputs.skip == 'false'
+      - name: Commit files
         run: |
 
           git config user.name "github-actions[bot]"
+
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
 
           git add release HAPP
 
-          git commit -m "build: ${{ steps.routing.outputs.tag }}"
 
-          git tag "${{ steps.routing.outputs.tag }}"
-
-          git push origin HEAD --follow-tags
+          git commit -m "build: ${{ steps.routing.outputs.tag }}" || echo "nothing to commit"
 
 
 
-      - name: Publish GitHub Release
-        if: steps.changes.outputs.skip == 'false'
+      - name: Push changes
+        run: |
+
+          git push origin HEAD || true
+
+
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
 
         with:
