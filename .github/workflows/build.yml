@@ -93,9 +93,9 @@ jobs:
 
 
 
+
       - name: Build geoip.dat
         run: |
-
 
           git clone \
           --depth 1 \
@@ -103,29 +103,18 @@ jobs:
           https://github.com/v2fly/geoip.git geoip-tool
 
 
-
-          curl -fsSL \
-          https://github.com/v2fly/geoip/releases/latest/download/geoip.dat \
-          -o geoip-tool/upstream-geoip.dat
-
-
-
           cp build/russia-inside.txt \
           geoip-tool/russia-inside.txt || true
-
 
 
           cp config/geoip-custom.json \
           geoip-tool/config-custom.json
 
 
-
           cd geoip-tool
 
 
-
           go run ./ -c config-custom.json
-
 
 
           cp output/geoip.dat ../release/geoip.dat
@@ -136,16 +125,16 @@ jobs:
       - name: Check geo files
         run: |
 
+          echo "geoip size:"
+          ls -lh release/geoip.dat
 
-          echo "Checking geoip.dat"
+
+          echo "geosite size:"
+          ls -lh release/geosite.dat
 
 
+          echo "Checking RUSSIA:"
           strings release/geoip.dat | grep -i RUSSIA || true
-
-
-          echo "Checking geosite.dat"
-
-
           strings release/geosite.dat | grep -i RUSSIA || true
 
 
@@ -155,12 +144,9 @@ jobs:
         id: routing
         run: |
 
-
           TAG=$(date -u +%Y%m%d%H%M)
 
-
           echo "tag=$TAG" >> $GITHUB_OUTPUT
-
 
 
           python3 scripts/build_routing.py \
@@ -172,17 +158,13 @@ jobs:
       - name: Commit files
         run: |
 
-
           git config user.name "github-actions[bot]"
-
 
           git config user.email \
           "41898282+github-actions[bot]@users.noreply.github.com"
 
 
-
           git add release HAPP
-
 
 
           git commit \
@@ -194,7 +176,6 @@ jobs:
 
       - name: Push changes
         run: |
-
 
           git push origin HEAD || true
 
@@ -209,9 +190,7 @@ jobs:
           tag_name: ${{ steps.routing.outputs.tag }}
 
           files: |
-
             release/geosite.dat
-
             release/geoip.dat
 
 
