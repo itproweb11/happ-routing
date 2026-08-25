@@ -2,7 +2,6 @@
   "Name": "RU Direct - Global",
 
   "GlobalProxy": "true",
-
   "UseChunkFiles": "true",
 
   "RemoteDns": "8.8.8.8",
@@ -27,7 +26,9 @@
 
   "DnsHosts": {
     "dns.google": "8.8.8.8",
-    "common.dot.dns.yandex.net": "77.88.8.8"
+    "common.dot.dns.yandex.net": "77.88.8.8",
+    "lkfl2.nalog.ru": "213.24.64.175",
+    "lknpd.nalog.ru": "213.24.64.181"
   },
 
 
@@ -37,6 +38,7 @@
   "DirectSites": [
 
     "domain:2ip.ru",
+    "domain:www.2ip.ru",
     "domain:2ip.io",
     "domain:myip.com",
 
@@ -45,17 +47,52 @@
     "geosite:tld-ru",
     "geosite:category-ru",
 
-
     "domain:gosuslugi.ru",
-    "domain:nalog.ru",
     "domain:mos.ru",
-
-    "domain:yandex.ru",
-    "domain:ya.ru",
+    "domain:nalog.ru",
 
     "domain:vk.com",
     "domain:vk.ru",
-    "domain:ok.ru"
+    "domain:ok.ru",
+
+    "domain:yandex.ru",
+    "domain:yandex.com",
+    "domain:ya.ru",
+
+    "domain:mail.ru",
+    "domain:rutube.ru",
+    "domain:avito.ru",
+
+    "domain:wildberries.ru",
+    "domain:ozon.ru",
+    "domain:sberbank.ru",
+    "domain:tinkoff.ru",
+    "domain:vtb.ru",
+    "domain:alfabank.ru",
+
+    "domain:dns-shop.ru",
+    "domain:citilink.ru",
+    "domain:mvideo.ru",
+
+    "domain:hh.ru",
+    "domain:auto.ru",
+    "domain:drom.ru",
+    "domain:cian.ru",
+    "domain:domclick.ru",
+
+    "domain:2gis.ru",
+
+    "domain:maps.yandex.ru",
+    "domain:taxi.yandex.ru",
+    "domain:eda.yandex.ru",
+    "domain:music.yandex.ru",
+
+    "domain:kinopoisk.ru",
+    "domain:ivi.ru",
+    "domain:okko.tv",
+    "domain:wink.ru",
+    "domain:vkvideo.ru",
+    "domain:max.ru"
   ],
 
 
@@ -69,25 +106,19 @@
 
     "geosite:google",
 
-    "geosite:youtube",
-
-    "geosite:github",
-
-    "geosite:telegram",
-
     "domain:gemini.google.com",
-
     "domain:ai.google",
-
     "domain:generativelanguage.googleapis.com",
-
+    "domain:googleapis.com",
+    "domain:googleusercontent.com",
     "domain:accounts.google.com",
-
     "domain:oauth2.googleapis.com",
 
-    "domain:googleapis.com",
-
-    "domain:googleusercontent.com"
+    "geosite:youtube",
+    "geosite:google-play",
+    "geosite:github",
+    "geosite:telegram",
+    "geosite:twitch"
   ],
 
 
