@@ -1,6 +1,7 @@
 name: Build geo-files and Happ routing
 
 on:
+
   schedule:
     - cron: "20 4 * * *"
 
@@ -29,15 +30,20 @@ jobs:
 
     steps:
 
+
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
 
 
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.22"
-          cache: false
+          cache: true
+
 
 
       - name: Setup Python
@@ -46,20 +52,30 @@ jobs:
           python-version: "3.12"
 
 
+
       - name: Generate lists from opencck
         run: |
           python3 scripts/fetch_opencck.py --outdir build
 
 
+
       - name: Build geosite.dat
         run: |
 
-          git clone --depth 1 https://github.com/v2fly/domain-list-community.git dlc
+          git clone \
+          --depth 1 \
+          --filter=blob:none \
+          https://github.com/v2fly/domain-list-community.git dlc
 
-          git clone --depth 1 https://github.com/hydraponique/roscomvpn-geosite.git rvpn-geosite
+
+          git clone \
+          --depth 1 \
+          --filter=blob:none \
+          https://github.com/hydraponique/roscomvpn-geosite.git rvpn-geosite
 
 
           cp -f rvpn-geosite/data/* dlc/data/ || true
+
 
           cp build/russia-inside dlc/data/russia-inside || true
 
@@ -80,7 +96,12 @@ jobs:
       - name: Build geoip.dat
         run: |
 
-          git clone --depth 1 https://github.com/v2fly/geoip.git geoip-tool
+
+          git clone \
+          --depth 1 \
+          --filter=blob:none \
+          https://github.com/v2fly/geoip.git geoip-tool
+
 
 
           curl -fsSL \
@@ -88,28 +109,45 @@ jobs:
           -o geoip-tool/upstream-geoip.dat
 
 
-          cp build/russia-inside.txt geoip-tool/russia-inside.txt || true
+
+          cp build/russia-inside.txt \
+          geoip-tool/russia-inside.txt || true
 
 
-          cp config/geoip-custom.json geoip-tool/config-custom.json
+
+          cp config/geoip-custom.json \
+          geoip-tool/config-custom.json
+
 
 
           cd geoip-tool
 
 
+
           go run ./ -c config-custom.json
+
 
 
           cp output/geoip.dat ../release/geoip.dat
 
 
 
-      - name: Check geoip
+
+      - name: Check geo files
         run: |
+
 
           echo "Checking geoip.dat"
 
-          strings release/geoip.dat | grep -i ru || true
+
+          strings release/geoip.dat | grep -i RUSSIA || true
+
+
+          echo "Checking geosite.dat"
+
+
+          strings release/geosite.dat | grep -i RUSSIA || true
+
 
 
 
@@ -117,34 +155,49 @@ jobs:
         id: routing
         run: |
 
+
           TAG=$(date -u +%Y%m%d%H%M)
+
 
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
 
-          python3 scripts/build_routing.py --tag "$TAG"
+
+          python3 scripts/build_routing.py \
+          --tag "$TAG"
+
 
 
 
       - name: Commit files
         run: |
 
+
           git config user.name "github-actions[bot]"
 
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git config user.email \
+          "41898282+github-actions[bot]@users.noreply.github.com"
+
 
 
           git add release HAPP
 
 
-          git commit -m "build: ${{ steps.routing.outputs.tag }}" || echo "nothing to commit"
+
+          git commit \
+          -m "build: ${{ steps.routing.outputs.tag }}" \
+          || echo "nothing to commit"
+
 
 
 
       - name: Push changes
         run: |
 
+
           git push origin HEAD || true
+
 
 
 
@@ -156,7 +209,10 @@ jobs:
           tag_name: ${{ steps.routing.outputs.tag }}
 
           files: |
+
             release/geosite.dat
+
             release/geoip.dat
+
 
         continue-on-error: true
