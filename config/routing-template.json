@@ -66,17 +66,10 @@
     "domain:mvideo.ru",
 
     "domain:hh.ru",
-    "domain:youla.ru",
-    "domain:drom.ru",
     "domain:auto.ru",
+    "domain:drom.ru",
     "domain:cian.ru",
     "domain:domclick.ru",
-
-    "domain:lamoda.ru",
-    "domain:sportmaster.ru",
-    "domain:petrovich.ru",
-    "domain:leroymerlin.ru",
-    "domain:vseinstrumenti.ru",
 
     "domain:2gis.ru",
 
@@ -90,14 +83,12 @@
     "domain:okko.tv",
     "domain:wink.ru",
     "domain:vkvideo.ru",
-    "domain:max.ru",
-
-    "domain:sbermegamarket.ru"
+    "domain:max.ru"
   ],
 
   "DirectIp": [
     "geoip:private",
-    "geoip:ru"
+    "geoip:RU"
   ],
 
   "ProxySites": [
