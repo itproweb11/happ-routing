@@ -1,6 +1,17 @@
 {
   "input": [
     {
+      "type": "v2rayGeoIPDat",
+      "action": "add",
+      "args": {
+        "uri": "./upstream-geoip.dat",
+        "filter": [
+          "ru",
+          "private"
+        ]
+      }
+    },
+    {
       "type": "text",
       "action": "add",
       "args": {
