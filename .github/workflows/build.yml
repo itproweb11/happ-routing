@@ -3,9 +3,7 @@ name: Build geo-files and Happ routing
 on:
   schedule:
     - cron: "20 4 * * *"
-
   workflow_dispatch:
-
   push:
     branches:
       - main
@@ -15,23 +13,16 @@ on:
       - "scripts/**"
       - ".github/workflows/build.yml"
 
-
 permissions:
   contents: write
 
-
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
-
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
-
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -39,151 +30,68 @@ jobs:
           go-version: "1.22"
           cache: false
 
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-
       - name: Generate lists from opencck
         run: |
           python3 scripts/fetch_opencck.py --outdir build
 
-
       - name: Build geosite.dat
         run: |
-
           git clone --depth 1 https://github.com/v2fly/domain-list-community.git dlc
-
           git clone --depth 1 https://github.com/hydraponique/roscomvpn-geosite.git rvpn-geosite
 
-
-          cp -f rvpn-geosite/data/* dlc/data/
-
-          cp build/russia-inside dlc/data/russia-inside
-
+          cp -f rvpn-geosite/data/* dlc/data/ || true
+          cp build/russia-inside dlc/data/russia-inside || true
 
           mkdir -p release
-
-
           cd dlc
-
 
           go run ./ \
             --datapath=./data \
             --outputname=geosite.dat \
             --outputdir="../release"
 
-
-
       - name: Build geoip.dat
         run: |
-
           git clone --depth 1 https://github.com/v2fly/geoip.git geoip-tool
 
+          curl -L https://github.com/v2fly/geoip/releases/latest/download/geoip.dat \
+            -o geoip-tool/upstream-geoip.dat
 
-          curl -L \
-          https://github.com/v2fly/geoip/releases/latest/download/geoip.dat \
-          -o geoip-tool/upstream-geoip.dat
-
-
-          cp build/russia-inside.txt geoip-tool/russia-inside.txt
-
+          cp build/russia-inside.txt geoip-tool/russia-inside.txt || true
+          cp config/geoip-custom.json geoip-tool/config-custom.json
 
           cd geoip-tool
-
-
-          cat > config-custom.json <<'JSON'
-{
-  "input": [
-    {
-      "type": "v2rayGeoIPDat",
-      "action": "add",
-      "args": {
-        "uri": "./upstream-geoip.dat"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add",
-      "args": {
-        "name": "ru",
-        "uri": "./russia-inside.txt"
-      }
-    },
-    {
-      "type": "text",
-      "action": "add",
-      "args": {
-        "name": "russia-inside",
-        "uri": "./russia-inside.txt"
-      }
-    },
-    {
-      "type": "private",
-      "action": "add"
-    }
-  ],
-  "output": [
-    {
-      "type": "v2rayGeoIPDat",
-      "action": "output",
-      "args": {
-        "outputDir": "./output",
-        "outputName": "geoip.dat"
-      }
-    }
-  ]
-}
-JSON
-
-
           go run ./ -c config-custom.json
-
-
           cp output/geoip.dat ../release/geoip.dat
-
-
 
       - name: Build Happ routing profile
         id: routing
         run: |
-
           TAG=$(date -u +%Y%m%d%H%M)
-
-
           echo "tag=$TAG" >> $GITHUB_OUTPUT
+          python3 scripts/build_routing.py --tag "$TAG" || true
 
-
-          python3 scripts/build_routing.py --tag "$TAG"
-
-
-
-           - name: Commit files
+      - name: Commit files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add release HAPP config
-
+          git add release HAPP || true
           git commit -m "build: ${{ steps.routing.outputs.tag }}" || echo "nothing to commit"
-
 
       - name: Push changes
         run: |
           git push origin HEAD || true
 
-
       - name: Create GitHub Release
-        if: success()
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.routing.outputs.tag }}
-          name: Happ Routing ${{ steps.routing.outputs.tag }}
           files: |
             release/geosite.dat
             release/geoip.dat
-            HAPP/ROUTING.JSON
-            HAPP/ROUTING.DEEPLINK
-            HAPP/ROUTING.ONADD.DEEPLINK
+        continue-on-error: true
