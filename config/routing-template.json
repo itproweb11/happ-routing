@@ -25,11 +25,10 @@
     "lknpd.nalog.ru": "213.24.64.181"
   },
 
-  "RouteOrder": "block-proxy-direct",
+  "RouteOrder": "block-direct-proxy",
 
   "DirectSites": [
     "geosite:private",
-    "geosite:tld-ru",
     "geosite:russia-inside",
     "geosite:category-ru",
 
@@ -55,7 +54,8 @@
   ],
 
   "DirectIp": [
-    "geoip:private"
+    "geoip:private",
+    "geoip:ru"
   ],
 
   "ProxySites": [
