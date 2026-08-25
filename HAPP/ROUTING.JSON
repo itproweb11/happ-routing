@@ -10,9 +10,9 @@
   "DomesticDNSType": "DoH",
   "DomesticDNSDomain": "https://common.dot.dns.yandex.net/dns-query",
   "DomesticDNSIP": "77.88.8.8",
-  "Geositeurl": "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat",
-  "Geoipurl": "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat",
-  "LastUpdated": "1787645716",
+  "Geositeurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geosite.dat",
+  "Geoipurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geoip.dat",
+  "LastUpdated": "1787646478",
   "DnsHosts": {
     "dns.google": "8.8.8.8",
     "common.dot.dns.yandex.net": "77.88.8.8",
@@ -22,6 +22,8 @@
   "RouteOrder": "block-direct-proxy",
   "DirectSites": [
     "geosite:private",
+    "geosite:russia-inside",
+    "geosite:tld-ru",
     "geosite:category-ru",
     "domain:2ip.ru",
     "domain:2ip.io",
@@ -66,7 +68,7 @@
   ],
   "DirectIp": [
     "geoip:private",
-    "geoip:ru"
+    "geoip:RU"
   ],
   "ProxySites": [
     "geosite:youtube",
