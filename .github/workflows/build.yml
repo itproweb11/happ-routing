@@ -1,7 +1,6 @@
 name: Build geo-files and Happ routing
 
 on:
-
   schedule:
     - cron: "20 4 * * *"
 
@@ -27,15 +26,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
-
     steps:
-
 
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
 
 
       - name: Setup Go
@@ -45,18 +41,15 @@ jobs:
           cache: true
 
 
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
 
-
       - name: Generate lists from opencck
         run: |
           python3 scripts/fetch_opencck.py --outdir build
-
 
 
       - name: Build geosite.dat
@@ -119,7 +112,7 @@ jobs:
       "type": "text",
       "action": "add",
       "args": {
-        "name": "ru",
+        "name": "russia-inside",
         "uri": "./russia-inside.txt"
       }
     },
@@ -154,12 +147,20 @@ EOF
 
           echo "========== GEOIP RESULT =========="
 
+
           ls -lh output/geoip.dat
 
 
-          SIZE=$(stat -c%s output/geoip.dat)
+          SIZE=$(wc -c < output/geoip.dat)
+
 
           echo "SIZE: $SIZE bytes"
+
+
+          if [ "$SIZE" -gt 5000000 ]; then
+            echo "ERROR: geoip.dat too large"
+            exit 1
+          fi
 
 
           cp output/geoip.dat ../release/geoip.dat
@@ -177,9 +178,9 @@ EOF
 
           echo "========== CHECK RUSSIA =========="
 
-          strings release/geoip.dat | grep -i RUSSIA || true
+          strings release/geoip.dat | grep -i russia || true
 
-          strings release/geosite.dat | grep -i RUSSIA || true
+          strings release/geosite.dat | grep -i russia || true
 
 
 
@@ -202,8 +203,7 @@ EOF
 
           git config user.name "github-actions[bot]"
 
-          git config user.email \
-            "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
 
           git add -A release/ HAPP/
@@ -226,12 +226,10 @@ EOF
         uses: softprops/action-gh-release@v2
 
         with:
-
           tag_name: ${{ steps.routing.outputs.tag }}
 
           files: |
             release/geosite.dat
             release/geoip.dat
-
 
         continue-on-error: true
