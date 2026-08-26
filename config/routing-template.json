@@ -90,8 +90,7 @@
   ],
 
   "DirectIp": [
-    "geoip:private",
-    "geoip:russia-inside"
+    "geoip:private"
   ],
 
   "ProxySites": [
