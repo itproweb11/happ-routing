@@ -3,7 +3,7 @@ name: Update routing-template.json
 on:
   workflow_dispatch:   # вручную
   schedule:
-    - cron: '20 4 * * *'   # точно как в старом #76
+    - cron: '20 4 * * *'   # как было в старом #76
 
 jobs:
   build:
@@ -15,11 +15,18 @@ jobs:
       with:
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Update routing-template.json из бэкапа
       run: |
         git checkout HEAD -- config/routing-template.json
         git add config/routing-template.json
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git commit -m "Update routing-template.json"
-        git push
+        
+        if git diff --quiet -- config/routing-template.json; then
+          echo "Файл уже актуальный"
+        else
+          git commit -m "Update routing-template.json from backup"
+          git push
+          echo "✅ routing-template.json успешно обновлён!"
+        fi
