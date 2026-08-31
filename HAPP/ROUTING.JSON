@@ -12,7 +12,7 @@
   "DomesticDNSIP": "77.88.8.8",
   "Geositeurl": "https://cdn.jsdelivr.net/gh/itproweb11/happ-routing@main/release/geosite.dat",
   "Geoipurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geoip.dat",
-  "LastUpdated": "1788167785",
+  "LastUpdated": "1788168270",
   "DnsHosts": {
     "dns.google": "8.8.8.8",
     "common.dot.dns.yandex.net": "77.88.8.8",
@@ -72,6 +72,16 @@
     "geoip:private"
   ],
   "ProxySites": [
+    "domain:redbarrelsgames.com",
+    "domain:epicgames.com",
+    "domain:epicgames.dev",
+    "domain:epicgamesusercontent.com",
+    "domain:easy.ac",
+    "domain:easyanticheat.net",
+    "domain:amazonaws.com",
+    "domain:awsapps.com",
+    "domain:cloudfront.net",
+    "domain:akamaized.net",
     "domain:gemini.google.com",
     "domain:bard.google.com",
     "domain:ai.google",
