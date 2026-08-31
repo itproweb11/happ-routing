@@ -250,6 +250,6 @@
 
   "BlockIp": [],
 
-  "DomainStrategy": "AsIs",
+  "DomainStrategy": "IPIfNonMatch",
   "FakeDNS": "false"
 }
