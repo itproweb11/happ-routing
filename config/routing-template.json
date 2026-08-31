@@ -94,6 +94,16 @@
   ],
 
   "ProxySites": [
+    "domain:redbarrelsgames.com",
+    "domain:epicgames.com",
+    "domain:epicgames.dev",
+    "domain:epicgamesusercontent.com",
+    "domain:easy.ac",
+    "domain:easyanticheat.net",
+    "domain:amazonaws.com",
+    "domain:awsapps.com",
+    "domain:cloudfront.net",
+    "domain:akamaized.net",
     "domain:gemini.google.com",
     "domain:bard.google.com",
     "domain:ai.google",
