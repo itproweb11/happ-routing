@@ -16,7 +16,7 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Update routing-template.json из бэкапа
+       - name: Update routing-template.json из бэкапа
       run: |
         git checkout HEAD -- routing-template.json
         git add routing-template.json
