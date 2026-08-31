@@ -108,6 +108,27 @@
     "domain:discovery.beta.steamserver.net",
     "domain:cqloud.com",
 
+    "domain:redbarrelsgames.com",
+    "domain:theoutlasttrials.com",
+
+    "domain:epicgames.com",
+    "domain:epicgames.dev",
+    "domain:epicgamesusercontent.com",
+    "domain:on.epicgames.com",
+    "domain:ol.epicgames.com",
+    "domain:api.epicgames.dev",
+
+    "domain:easy.ac",
+    "domain:easyanticheat.net",
+    "domain:eac-cdn.com",
+
+    "domain:playfab.com",
+    "domain:playfabapi.com",
+
+    "domain:akamaized.net",
+    "domain:akamaihd.net",
+    "domain:fastly.net",
+
     "domain:steambroadcast.akamaized.net",
     "domain:steamvideo-a.akamaihd.net",
     "domain:video.st.dl.eccdnx.com",
@@ -116,16 +137,7 @@
     "domain:video.cdn.queniuqe.com",
     "domain:video.cdn.steamchina.queniuam.com",
 
-    "domain:redbarrelsgames.com",
-    "domain:epicgames.com",
-    "domain:epicgames.dev",
-    "domain:epicgamesusercontent.com",
-    "domain:easy.ac",
-    "domain:easyanticheat.net",
-    "domain:eac-cdn.com",
     "domain:battleye.com",
-    "domain:playfab.com",
-    "domain:playfabapi.com",
 
     "domain:roblox.com",
     "domain:rbxcdn.com",
