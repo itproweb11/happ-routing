@@ -1,7 +1,7 @@
 name: Update routing-template.json
 
 on:
-  workflow_dispatch:   # вручную
+  workflow_dispatch:   # вручную через "Run workflow"
   schedule:
     - cron: '20 4 * * *'   # как было в старом #76
 
