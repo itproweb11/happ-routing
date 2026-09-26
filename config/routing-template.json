@@ -14,8 +14,8 @@
   "DomesticDNSDomain": "https://common.dot.dns.yandex.net/dns-query",
   "DomesticDNSIP": "77.88.8.8",
 
-  "Geositeurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geosite.dat",
-  "Geoipurl": "https://raw.githubusercontent.com/itproweb11/happ-routing/main/release/geoip.dat",
+  "Geositeurl": "https://geosite.maxiproxy.net:8443/geosite.dat",
+  "Geoipurl": "https://geoip.maxiproxy.net:8443/geoip.dat",
 
   "LastUpdated": "{{auto}}",
 

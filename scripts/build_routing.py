@@ -6,9 +6,8 @@ HAPP/ROUTING.JSON
 HAPP/ROUTING.DEEPLINK
 HAPP/ROUTING.ONADD.DEEPLINK
 
-Генерирует ссылки:
-- geosite.dat через jsDelivr (быстро)
-- geoip.dat через GitHub raw (актуально)
+Сохраняет ссылки на геофайлы из шаблона.
+Если ссылки не заданы, использует jsDelivr и GitHub raw.
 
 Обновляет LastUpdated для принудительной загрузки Happ.
 """
@@ -96,12 +95,12 @@ def main() -> int:
 
 
     cfg["Geositeurl"] = (
-        f"{jsdelivr}/geosite.dat"
+        cfg.get("Geositeurl") or f"{jsdelivr}/geosite.dat"
     )
 
 
     cfg["Geoipurl"] = (
-        f"{github_raw}/geoip.dat"
+        cfg.get("Geoipurl") or f"{github_raw}/geoip.dat"
     )
 
 
@@ -172,11 +171,11 @@ def main() -> int:
     )
 
     print(
-        f"Geosite: {jsdelivr}/geosite.dat"
+        f"Geosite: {cfg['Geositeurl']}"
     )
 
     print(
-        f"Geoip: {github_raw}/geoip.dat"
+        f"Geoip: {cfg['Geoipurl']}"
     )
 
     print(
