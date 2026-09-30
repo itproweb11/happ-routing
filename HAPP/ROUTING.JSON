@@ -12,7 +12,7 @@
   "DomesticDNSIP": "77.88.8.8",
   "Geositeurl": "https://geosite.maxiproxy.net:8443/geosite.dat",
   "Geoipurl": "https://geoip.maxiproxy.net:8443/geoip.dat",
-  "LastUpdated": "1790678735",
+  "LastUpdated": "1790764402",
   "DnsHosts": {
     "dns.google": "8.8.8.8",
     "common.dot.dns.yandex.net": "77.88.8.8",
